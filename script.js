@@ -1,21 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Fonction pour changer de page
     function changePage(targetId) {
-        // Cache toutes les pages
-        document.querySelectorAll('.page').forEach(page => {
-            page.style.display = 'none';
-            page.classList.remove('active');
-        });
-
-        // Affiche la page ciblée
+        const currentPage = document.querySelector('.page.active');
         const targetPage = document.getElementById(targetId);
-        setTimeout(() => {
-            targetPage.style.display = 'block';
-            setTimeout(() => targetPage.classList.add('active'), 10); // Léger délai pour la transition CSS
-        }, 10);
+
+        // Assure que la page cible est prête pour l'animation (positionnée hors écran à gauche)
+        targetPage.style.display = 'block';
+        targetPage.classList.add('pre-active');
+
+        if (currentPage) {
+            currentPage.classList.add('slide-out');
+            currentPage.addEventListener('animationend', function() {
+                this.style.display = 'none';
+                this.classList.remove('active', 'slide-out');
+
+                // Initie l'animation d'entrée après que la page actuelle est complètement cachée
+                targetPage.classList.remove('pre-active');
+                targetPage.classList.add('active', 'slide-in');
+                targetPage.addEventListener('animationend', function() {
+                    this.classList.remove('slide-in');
+                }, { once: true });
+            }, { once: true });
+        } else {
+            // Si aucune page n'est active initialement, affiche directement la cible
+            setTimeout(() => targetPage.classList.add('active'), 10);
+        }
     }
 
-    // Ajoute des écouteurs d'événements aux boutons
     document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const targetId = this.getAttribute('data-target');
@@ -23,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Initialise la première page comme active
-    changePage('page1');
+    // Prépare la première page sans animation
+    const firstPage = document.getElementById('page1');
+    firstPage.style.display = 'block';
+    setTimeout(() => firstPage.classList.add('active'), 10);
 });

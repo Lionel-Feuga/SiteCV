@@ -1,10 +1,19 @@
+.page {
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 100%;
+}
+
+
 .presentation {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     width: 81vw;
     height: auto;
-    margin-top: 5%;
+    margin-top: 2%;
+    margin-left: 5rem;
 }
 
 .text-presentation{

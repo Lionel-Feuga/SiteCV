@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lionel Feuga site CV</title>
+    <script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+            <div id="app">
+                <nav class="navbar">
+                    <button class="nav-btn" data-target="page1">         
+                        <img class="logo" src="images/logoLionelFeuga.png" alt="Logo du site web de Lionel Feuga" width="64" height="64">
+                    </button>
+                    <div class="navbar-end">
+                        <button class="nav-btn" data-target="page1">Accueil</button>
+                        <button class="nav-btn" data-target="page2">À propos de moi</button>
+                        <button class="nav-btn" data-target="page3">Me contacter</button>
+                    </div>
+                </nav>
+            
+                <div class="page" id="page1">Contenu de la page 1...</div>
+                <div class="page" id="page2" style="display:none;">Contenu de la page 2...</div>
+                <div class="page" id="page3" style="display:none;">Contenu de la page 3...</div>
+            </div>
+
+
+<script src="script.js"></script>
+</body>
+
+</html>

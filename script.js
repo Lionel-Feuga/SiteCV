@@ -1,40 +1,44 @@
 document.addEventListener('DOMContentLoaded', function() {
-    function changePage(targetId) {
-        const currentPage = document.querySelector('.page.active');
-        const targetPage = document.getElementById(targetId);
-
-        // Assure que la page cible est prête pour l'animation (positionnée hors écran à gauche)
-        targetPage.style.display = 'block';
-        targetPage.classList.add('pre-active');
-
-        if (currentPage) {
-            currentPage.classList.add('slide-out');
-            currentPage.addEventListener('animationend', function() {
-                this.style.display = 'none';
-                this.classList.remove('active', 'slide-out');
-
-                // Initie l'animation d'entrée après que la page actuelle est complètement cachée
-                targetPage.classList.remove('pre-active');
-                targetPage.classList.add('active', 'slide-in');
-                targetPage.addEventListener('animationend', function() {
-                    this.classList.remove('slide-in');
-                }, { once: true });
-            }, { once: true });
-        } else {
-            // Si aucune page n'est active initialement, affiche directement la cible
-            setTimeout(() => targetPage.classList.add('active'), 10);
-        }
-    }
+    let currentPageIndex = 1;
 
     document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            changePage(targetId);
+            const targetIndex = parseInt(this.getAttribute('data-target'), 10);
+            changePage(targetIndex);
         });
     });
 
-    // Prépare la première page sans animation
-    const firstPage = document.getElementById('page1');
-    firstPage.style.display = 'block';
-    setTimeout(() => firstPage.classList.add('active'), 10);
+    function changePage(targetIndex) {
+        const currentPage = document.querySelector('.page.active');
+        const targetPage = document.querySelector(`.page[data-index="${targetIndex}"]`);
+
+        // Assurez-vous que la page ciblée est initialement masquée et prête pour l'animation
+        targetPage.style.display = 'block';
+
+        // Choix de l'animation basé sur l'index de la page
+        const slideOutClass = targetIndex > currentPageIndex ? 'slide-out-left' : 'slide-out-right';
+        const slideInClass = targetIndex > currentPageIndex ? 'slide-in-from-right' : 'slide-in-from-left';
+
+        // Application des classes pour l'animation
+        currentPage.classList.add(slideOutClass);
+        targetPage.classList.add(slideInClass, 'active');
+
+        // Mise à jour de l'index de la page courante
+        currentPageIndex = targetIndex;
+
+        // Nettoyage après l'animation
+        currentPage.addEventListener('animationend', () => {
+            currentPage.classList.remove('active', slideOutClass);
+            currentPage.style.display = 'none';
+        }, { once: true });
+
+        targetPage.addEventListener('animationend', () => {
+            targetPage.classList.remove(slideInClass);
+        }, { once: true });
+    }
+
+    // Masquez toutes les pages sauf la page active au chargement
+    document.querySelectorAll('.page:not(.active)').forEach(page => {
+        page.style.display = 'none';
+    });
 });

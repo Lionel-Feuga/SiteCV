@@ -1,3 +1,87 @@
-.checkmark{
+.checkmark, .experiment{
     padding-right: 10px;
+}
+
+.checkmark{
+    color: limegreen; 
+}
+.experiment{
+    color: #00b4d8;
+}
+
+
+.about-me-content{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 7rem;
+}
+
+.skills {
+    max-width: 1200px;
+    margin-left: 15rem;
+    padding: 2rem;
+}
+
+.section-title {
+    margin-top: 3rem;
+    font-size: 4rem;
+    color: #007bff; /* Ou toute autre couleur préférée */
+}
+
+.about-me-content {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur les écrans plus petits */
+}
+
+.section-left, .section-right {
+    flex: 1;
+    margin: 1rem;
+}
+
+.competence-title h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.competence-item li {
+    display: flex;
+    align-items: center;
+    margin: 1rem ;
+}
+
+.competence-item i {
+    margin-right: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size:xx-large;
+}
+
+.checkmark, .experiment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; /* Taille de l'icône */
+    height: 24px; /* Taille de l'icône */
+}
+
+/* Style pour les listes de compétences et expérimentations */
+ul.my-1 {
+    list-style-type: none; /* Supprime les puces */
+    padding: 0;
+}
+
+/* Ajoutez des styles pour les médias queries si nécessaire pour améliorer la réactivité */
+@media (max-width: 768px) {
+    .about-me-content {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    
+    .section-title {
+        margin: 2rem auto;
+    }
 }

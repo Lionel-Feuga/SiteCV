@@ -68,10 +68,36 @@
 }
 
 /* Responsive Design */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+.logo{
+    margin-left: 135%;
+}
+
+    .navbar-end{
+        display: flex;
+        flex-wrap: nowrap;
+        margin-top: 1rem;
+        
+    }
     .presentation {
         flex-direction: row; /* Horizontale pour les écrans plus larges */
         justify-content: space-around;
+        font-size: 0.5em;
+        margin-left: 2rem;
+        
     }
+    .img-presentation{
+        display: none;
+    }
+
+    .sous-text-buttons{
+        display: flex;
+        margin-left: 1rem;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
 }
   
